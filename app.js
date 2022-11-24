@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
-
+const PORT = process.env.PORT || 3001;
 const path = require("path");
 
-app.listen(3001,() => {
-    console.log("Server Start at port 3001")
+app.use(express.static(path.join(__dirname,"public")));
+
+app.get("/",(req,res) => {
+    res.sendFile(path.resolve(__dirname,"public","index.html"));
 });
 
-app.use(express.static(path.join(__dirname,"public")));
+app.listen(PORT,() => {
+    console.log("Server Start at port 3001")
+});
